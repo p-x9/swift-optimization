@@ -4,7 +4,7 @@ import PackageDescription
 import CompilerPluginSupport
 
 let package = Package(
-    name: "OptimizationFlag",
+    name: "SwiftOptimization",
     platforms: [
         .macOS(.v10_15),
         .iOS(.v13),
@@ -14,8 +14,8 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "OptimizationFlag",
-            targets: ["OptimizationFlag"]
+            name: "SwiftOptimization",
+            targets: ["SwiftOptimization"]
         )
     ],
     dependencies: [
@@ -23,17 +23,17 @@ let package = Package(
     ],
     targets: [
         .macro(
-            name: "OptimizationFlagMacros",
+            name: "SwiftOptimizationMacros",
             dependencies: [
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax")
             ]
         ),
-        .target(name: "OptimizationFlag", dependencies: ["OptimizationFlagMacros"]),
+        .target(name: "SwiftOptimization", dependencies: ["SwiftOptimizationMacros"]),
         .testTarget(
-            name: "OptimizationFlagTests",
+            name: "SwiftOptimizationTests",
             dependencies: [
-                "OptimizationFlagMacros",
+                "SwiftOptimizationMacros",
                 .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
             ]
         ),
