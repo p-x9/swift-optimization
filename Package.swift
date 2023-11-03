@@ -22,18 +22,28 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-syntax.git", from: "509.0.0"),
     ],
     targets: [
+        .target(
+            name: "SwiftOptimization",
+            dependencies: [
+                "SwiftOptimizationMacros",
+                "SwiftOptimizationSupport"
+            ]
+        ),
         .macro(
             name: "SwiftOptimizationMacros",
             dependencies: [
+                "SwiftOptimizationSupport",
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax")
             ]
         ),
-        .target(name: "SwiftOptimization", dependencies: ["SwiftOptimizationMacros"]),
+        .target(name: "SwiftOptimizationSupport"),
         .testTarget(
             name: "SwiftOptimizationTests",
             dependencies: [
+                "SwiftOptimization",
                 "SwiftOptimizationMacros",
+                "SwiftOptimizationSupport",
                 .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
             ]
         ),
